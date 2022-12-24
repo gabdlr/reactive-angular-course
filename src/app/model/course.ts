@@ -1,3 +1,7 @@
+export enum Category {
+  BEGINNER='BEGINNER',
+  ADVANCED='ADVANCED'
+}
 export interface Course {
   id: string;
   description: string;
@@ -7,7 +11,7 @@ export interface Course {
   price: number;
   uploadedImageUrl: string;
   courseListIcon: string;
-  category: string;
+  category: Category;
   lessonsCount: number;
 }
 
