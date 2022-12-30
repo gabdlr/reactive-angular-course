@@ -18,7 +18,9 @@ export class AuthStoreService {
   user$: Observable<User>;
   private subject: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
-  constructor(private httpClient: HttpClient,private browserStorageService: BrowserStorageService) {
+  constructor(private browserStorageService: BrowserStorageService,
+              private httpClient: HttpClient) 
+  {
     this.user$ = this.subject.asObservable();
     this.isLoggedIn$ = this.user$
       .pipe(
