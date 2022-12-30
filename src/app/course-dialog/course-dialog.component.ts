@@ -4,14 +4,18 @@ import {Course} from "../model/course";
 import {FormBuilder, Validators, FormGroup} from "@angular/forms";
 import * as moment from 'moment';
 import {catchError} from 'rxjs/operators';
-import {throwError} from 'rxjs';
+import {of, throwError} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CoursesService } from '../services/courses.service';
+import { LoadingService } from '../loading/loading.service';
+import { MessagesService } from '../messages/messages.service';
+import { CoursesStoreService } from '../services/courses.store.service';
 
 @Component({
     selector: 'course-dialog',
     templateUrl: './course-dialog.component.html',
-    styleUrls: ['./course-dialog.component.css']
+    styleUrls: ['./course-dialog.component.css'],
+    providers: [LoadingService, MessagesService]
 })
 export class CourseDialogComponent implements AfterViewInit {
 
@@ -20,9 +24,10 @@ export class CourseDialogComponent implements AfterViewInit {
 
     constructor(
         @Inject(MAT_DIALOG_DATA) course:Course,
-        private coursesService: CoursesService,
+        private coursesStoreService: CoursesStoreService,
         private dialogRef: MatDialogRef<CourseDialogComponent>,
-        private fb: FormBuilder) {
+        private fb: FormBuilder,
+        private messageService: MessagesService) {
 
         this.course = course;
 
@@ -39,13 +44,11 @@ export class CourseDialogComponent implements AfterViewInit {
 
     }
 
-    save() {
-
+    save(): void{
         const changes = this.form.value;
-        this.coursesService.saveCourse(this.course.id,changes)
-            .subscribe({
-                next: (value) => this.dialogRef.close(value)
-            })
+        this.coursesStoreService.saveCourse(this.course.id,changes)
+        .subscribe();
+        this.dialogRef.close(changes); 
     }
 
     close() {
