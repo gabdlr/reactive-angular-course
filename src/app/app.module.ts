@@ -79,10 +79,12 @@ import { MessagesService } from './messages/messages.service';
   ],
   providers: [
     LoadingService,
-    MessagesService
+    MessagesService,
+    Storage
   ],
   bootstrap: [AppComponent],
   entryComponents: [CourseDialogComponent]
 })
 export class AppModule {
+  
 }
