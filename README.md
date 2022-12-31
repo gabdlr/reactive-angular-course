@@ -1,4 +1,4 @@
-
+This project is from a course I've taken in Udemy related to the reactive approach when making angular applications
 ## The Reactive Angular Course
 
 This repository contains the code of the [Reactive Angular Course](https://angular-university.io/course/reactive-angular-course).
